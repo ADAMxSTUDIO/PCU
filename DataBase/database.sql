@@ -1,4 +1,5 @@
 -- DataBase Name
+-- DROP DATABASE IF EXISTS urgent_case; 
 CREATE DATABASE urgent_case;
 USE urgent_case;
 
@@ -18,13 +19,20 @@ CREATE TABLE patients(
     CONSTRAINT FK_Patient_User FOREIGN KEY patients(ID) REFERENCES users(ID) 
 );
 
+-- -- Agents Tables is for gathering all agent infos who's handling the patient's case
+-- CREATE TABLE agents(
+--     ID INT PRIMARY KEY,
+--     CONSTRAINT FK_Agent_User FOREIGN KEY agents(ID) REFERENCES users(ID) 
+-- );
+-- DISCARDED : 
+
 -- Cases Table is for storing all case infos of a patient with its responsible (admin/agent)
 CREATE TABLE cases(
     ID INT PRIMARY KEY AUTO_INCREMENT,
     details VARCHAR(255) NOT NULL,
     attachment BLOB NOT NULL,
     patient_id INT,
-    CONSTRAINT FK_Case_Patient FOREIGN KEY cases(ID) REFERENCES patient(ID)
+    CONSTRAINT FK_Case_Patient FOREIGN KEY cases(ID) REFERENCES patients(ID)
 );
 
 -- Admins Table is for admin infos with the reponsible of the patient's case
@@ -38,11 +46,9 @@ CREATE TABLE admins(
 -- Treatments Table is for storing patient's new treatments after creating his case
 CREATE TABLE treatments(
     ID INT PRIMARY KEY AUTO_INCREMENT,
-    agent_id INT NULL,
     admin_id INT NULL,
     date_treat DATETIME NOT NULL,
     details VARCHAR(255) NOT NULL,
     isClosed BOOLEAN DEFAULT false,
-    CONSTRAINT FK_Treat_Agent FOREIGN KEY treatments(agent_id) REFERENCES agents(ID),
     CONSTRAINT FK_Treat_Admin FOREIGN KEY treatments(admin_id) REFERENCES admins(ID) 
 );
