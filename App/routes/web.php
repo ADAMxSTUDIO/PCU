@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Home Page
+Route::get('/Home', function () {
+    return view('index');
+});
+
+// Form of add user
+Route::get('/Create_Case', function () {
+    return view('create');
 });
