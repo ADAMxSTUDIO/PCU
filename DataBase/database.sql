@@ -1,54 +1,51 @@
 -- DataBase Name
--- DROP DATABASE IF EXISTS urgent_case; 
 CREATE DATABASE urgent_case;
 USE urgent_case;
 
--- Users Table is for providing all common infos to patients & admins Tables
+-- Roles Table is for fetching all the user roles which can have
+CREATE TABLE roles(
+    ID PRIMARY KEY AUTO_INCREMENT,
+    label NOT NULL UNIQUE
+);
+
+-- Checks whether the roles are compromised between the values below
+CONSTRAINT CHK_Role CHECK (label = 'admin' OR label = 'patient' OR label = 'agent');
+
+-- Fill the roles with the sames values by default
+INSERT INTO roles(label) VALUES('admin'), ('patient'), ('agent');
+
+-- Users Table is for providing all infos who could be either patients, admin or agents
 CREATE TABLE users(
     ID INT PRIMARY KEY AUTO_INCREMENT,
-    firstname VARCHAR(45) NOT NULL,
-    lastname VARCHAR(45) NOT NULL,
-    phone VARCHAR(13) NOT NULL
-);
-
--- Patients Tables is for gathering all patients infos
-CREATE TABLE patients(
-    ID INT PRIMARY KEY,
     IDCS INT(10) UNIQUE NULL,
     IDREG INT(29) UNIQUE NULL,
-    CONSTRAINT FK_Patient_User FOREIGN KEY patients(ID) REFERENCES users(ID) 
+    firstname VARCHAR(45) NOT NULL,
+    lastname VARCHAR(45) NOT NULL,
+    phone VARCHAR(13) NOT NULL,
+    hasRole INT NOT NULL,
+    CONSTRAINT FK_User_Role FOREIGN KEY users(hasRole) REFERENCES roles(ID) 
 );
-
--- -- Agents Tables is for gathering all agent infos who's handling the patient's case
--- CREATE TABLE agents(
---     ID INT PRIMARY KEY,
---     CONSTRAINT FK_Agent_User FOREIGN KEY agents(ID) REFERENCES users(ID) 
--- );
--- DISCARDED : 
 
 -- Cases Table is for storing all case infos of a patient with its responsible (admin/agent)
 CREATE TABLE cases(
     ID INT PRIMARY KEY AUTO_INCREMENT,
     details VARCHAR(255) NOT NULL,
     attachment BLOB NOT NULL,
-    patient_id INT,
-    CONSTRAINT FK_Case_Patient FOREIGN KEY cases(ID) REFERENCES patients(ID)
-);
-
--- Admins Table is for admin infos with the reponsible of the patient's case
-CREATE TABLE admins(
-    ID INT PRIMARY KEY,
-    agent_id INT NULL,   
-    CONSTRAINT FK_Admin_User FOREIGN KEY admins(ID) REFERENCES users(ID),
-    CONSTRAINT FK_Admin_Patient FOREIGN KEY admins(agent_id) REFERENCES patients(ID) 
+    created_by INT NOT NULL,
+    patient_id INT NOT NULL,
+    responsible_id INT NOT NULL,
+    CONSTRAINT FK_Case_Creator FOREIGN KEY cases(created_by) REFERENCES users(ID),
+    CONSTRAINT FK_Case_Patient FOREIGN KEY cases(patient_id) REFERENCES users(ID),
+    CONSTRAINT FK_Case_Respons FOREIGN KEY cases(responsible_id) REFERENCES users(ID)
 );
 
 -- Treatments Table is for storing patient's new treatments after creating his case
 CREATE TABLE treatments(
     ID INT PRIMARY KEY AUTO_INCREMENT,
-    admin_id INT NULL,
+    patient_id INT NOT NULL,
+    treated_by TEXT NOT NULL,
     date_treat DATETIME NOT NULL,
     details VARCHAR(255) NOT NULL,
     isClosed BOOLEAN DEFAULT false,
-    CONSTRAINT FK_Treat_Admin FOREIGN KEY treatments(admin_id) REFERENCES admins(ID) 
+    CONSTRAINT FK_Treat_Patient FOREIGN KEY treatments(patient_id) REFERENCES users(ID)
 );
