@@ -15,6 +15,14 @@ return new class extends Migration
     {
         Schema::create('cases', function (Blueprint $table) {
             $table->id();
+            $table->string('details');
+            $table->binary('attachment')->nullable();
+            $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('patient_id');
+            $table->unsignedBigInteger('responsible_id');
+            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('patient_id')->references('id')->on('users');
+            $table->foreign('responsible_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
