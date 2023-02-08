@@ -4,12 +4,13 @@ USE urgent_case;
 
 -- Roles Table is for fetching all the user roles which can have
 CREATE TABLE roles(
-    ID PRIMARY KEY AUTO_INCREMENT,
-    label NOT NULL UNIQUE
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    label VARCHAR(10) NOT NULL UNIQUE
 );
 
 -- Checks whether the roles are compromised between the values below
-CONSTRAINT CHK_Role CHECK (label = 'admin' OR label = 'patient' OR label = 'agent');
+ALTER TABLE roles
+ADD CONSTRAINT CHK_Role CHECK (label = 'admin' OR label = 'patient' OR label = 'agent');
 
 -- Fill the roles with the sames values by default
 INSERT INTO roles(label) VALUES('admin'), ('patient'), ('agent');
@@ -19,6 +20,8 @@ CREATE TABLE users(
     ID INT PRIMARY KEY AUTO_INCREMENT,
     IDCS INT(10) UNIQUE NULL,
     IDREG INT(29) UNIQUE NULL,
+    username VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(13) NOT NULL,
     firstname VARCHAR(45) NOT NULL,
     lastname VARCHAR(45) NOT NULL,
     phone VARCHAR(13) NOT NULL,
@@ -30,7 +33,7 @@ CREATE TABLE users(
 CREATE TABLE cases(
     ID INT PRIMARY KEY AUTO_INCREMENT,
     details VARCHAR(255) NOT NULL,
-    attachment BLOB NOT NULL,
+    attachment BLOB NULL,
     created_by INT NOT NULL,
     patient_id INT NOT NULL,
     responsible_id INT NOT NULL,
