@@ -5,7 +5,10 @@ Migration :
 -- php artisan make:migration create_treatments_table
 Seeder :
 -- php artisan make:seeder RoleSeeder
-Models/Controllers :
+Model/Controller :
 -- php artisan make:model Role -r
 -- php artisan make:model State -r -- as Case(possessed by PHP)
 -- php artisan make:model Treatment -r
+Factorie :
+-- php artisan make:factory StateFactory
+-- php artisan make:factory TreatmentFactory
