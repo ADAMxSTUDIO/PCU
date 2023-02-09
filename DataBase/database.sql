@@ -21,7 +21,7 @@ CREATE TABLE users(
     IDCS INT(10) UNIQUE NULL,
     IDREG INT(29) UNIQUE NULL,
     username VARCHAR(255) UNIQUE NOT NULL,
-    password VARCHAR(13) NOT NULL,
+    password VARCHAR(17) NOT NULL,
     firstname VARCHAR(45) NOT NULL,
     lastname VARCHAR(45) NOT NULL,
     phone VARCHAR(13) NOT NULL,
