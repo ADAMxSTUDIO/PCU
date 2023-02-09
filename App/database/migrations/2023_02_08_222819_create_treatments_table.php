@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('treatments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('agent_id');
             $table->unsignedBigInteger('patient_id');
             $table->string('treated_by');
             $table->string('details');

@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('password', 13);
             $table->string('firstname', 45);
             $table->string('lastname', 45);
-            $table->string('phone', 13);
+            $table->string('phone', 17);
             $table->foreignId('hasRole')->references('id')->on('roles');
             $table->rememberToken();
             $table->timestamps();
