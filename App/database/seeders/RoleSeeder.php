@@ -20,7 +20,13 @@ class RoleSeeder extends Seeder
             'label' => 'agent', 
             'label' => 'patient'
         ];
-        
-        DB::table('roles')->insert($roles);
+
+        // foreach($roles as $role => $value){
+        //     DB::table('roles')->insert([$role => $value]);
+        // }
+        // DB::table('roles')->insert($roles);
+        DB::table('roles')->insert(['label' => 'admin']);
+        DB::table('roles')->insert(['label' => 'agent']);
+        DB::table('roles')->insert(['label' => 'patient']);
     }
 }
