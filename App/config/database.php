@@ -45,12 +45,12 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'url' => env('https://www.phpmyadmin.co'),
-            'host' => env('DB_HOST', 'sql7.freemysqlhosting.net'),
+            'url' => env('127.0.0.1'),
+            'host' => env('DB_HOST', 'localhost'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'sql7596025'),
-            'username' => env('DB_USERNAME', 'sql7596025'),
-            'password' => env('DB_PASSWORD', '7NJWlt6UUw'),
+            'database' => env('DB_DATABASE', 'urgent_case'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', ''),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
