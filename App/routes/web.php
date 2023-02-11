@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,8 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Home Page
-Route::get('/Home', function () {
+// Welcome Page
+Route::get('/', function () {
     return view('index');
 });
 
@@ -22,3 +23,6 @@ Route::get('/Home', function () {
 Route::get('/Create_Case', function () {
     return view('create');
 });
+
+// CRUD to manage users(admin, agents or patients)
+Route::resource('user', UserController::class);
