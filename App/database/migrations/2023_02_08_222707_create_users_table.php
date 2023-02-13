@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('IDCS')->nullable();
             $table->integer('IDREG')->nullable();
+            $table->string('profile')->nullable()->default('profile.png');
             $table->string('username')->unique();
             $table->timestamp('username_verified_at')->nullable();
             $table->string('password', 13);
