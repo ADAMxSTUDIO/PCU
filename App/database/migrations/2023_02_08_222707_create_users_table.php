@@ -18,12 +18,13 @@ return new class extends Migration
             $table->integer('IDCS')->nullable();
             $table->integer('IDREG')->nullable();
             $table->string('profile')->nullable()->default('profile.png');
-            $table->string('username')->unique();
-            $table->timestamp('username_verified_at')->nullable();
+            $table->string('email', 45)->unique();
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('password', 13);
             $table->string('firstname', 45);
             $table->string('lastname', 45);
             $table->string('phone', 17);
+            $table->string('hasAdmin')->default(false);
             $table->foreignId('hasRole')->references('id')->on('roles');
             $table->rememberToken();
             $table->timestamps();
