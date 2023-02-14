@@ -58,7 +58,7 @@ function searchCard () {
         search = document.querySelector('#search');
     // console.log(search, cards, roles, usernames, lastnames, firstnames, dates);
 
-    
+
     // collecting the cards and search for identitic pairs
     const searchMatches = (entry) => {
         let foundCards = [];
@@ -78,12 +78,12 @@ function searchCard () {
     }    
 
 
-
     // conceive the search result list container
     let resultList = document.querySelector('#search-results');
 
     // get the search input current value
-    var found = false;
+    var foundState = false;
+
     search.addEventListener('input', (event) => 
     {
         // chceck if the search input has any entries
@@ -94,33 +94,39 @@ function searchCard () {
             {
                 if(event.target.value.toLowerCase() ===  role.textContent.toLowerCase()) 
                 {
+                    resultList.removeChild(resultList.children[0]); 
                     if (searchMatches(role).length > 0) {
                         searchMatches(role).forEach( found => {
                             let result = document.createElement('div');
                             result.innerText = found;
                             resultList.appendChild(result);
                         })
-                        found = true;
+                        foundState = true;
                     }
                 }
             })
             
         }
-        if (found === false) {
-                let result = document.createElement('div');
-                result.innerText = 'Aucun n\'est trouvé !';
-                resultList.appendChild(result);
-            }
         else {
             resultList.style.display = 'none';
         }
     })
 
-    // check if no match was found
-    // if (found === true) {
-    //     resultList.setAttribute('style', 'height: 135px; overflow: auto;');
+    // manage the result list in case there is no user was found
+    // if (foundState === false) {
+    //     resultList.querySelectorAll('div').forEach ( div => {
+    //         resultList.removeChild(div);
+    //     })  
     // }
-    
+
+    // manage search input when the user aborts it
+    search.addEventListener('blur', (event) => {
+        event.target.value = '';
+        resultList.querySelectorAll('div').forEach ( div => {
+            resultList.removeChild(div);
+        }) 
+        resultList.style.display = 'none';
+    })
 }
 // => execute
 searchCard ();
