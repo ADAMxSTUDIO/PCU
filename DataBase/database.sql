@@ -21,11 +21,12 @@ CREATE TABLE users(
     IDCS INT(10) UNIQUE NULL,
     IDREG INT(29) UNIQUE NULL,
     profile TEXT NULL DEFAULT 'profile.png',
-    username VARCHAR(255) UNIQUE NOT NULL,
+    email VARCHAR(45) UNIQUE NOT NULL,
     password VARCHAR(17) NOT NULL,
     firstname VARCHAR(45) NOT NULL,
     lastname VARCHAR(45) NOT NULL,
     phone VARCHAR(13) NOT NULL,
+    hasAdmin BOOLEAN DEFAULT false,
     hasRole INT NOT NULL,
     CONSTRAINT FK_User_Role FOREIGN KEY users(hasRole) REFERENCES roles(ID) 
 );
