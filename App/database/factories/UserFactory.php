@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 /**
@@ -17,16 +18,28 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $hasAdmin = false;
+        $hasRole = fake()->numberBetween($min = 1, $max = 3);
+
+        // $role_ids = DB::table('users')->get('hasRole');
+        // foreach($role_ids as $role_id){
+        //     if($role_id->hasRole == 1){
+        //         $hasAdmin = true;
+        //         $hasRole = fake()->shuffle([2, 3]);
+        //     }
+        // }
+        
         return [
             'IDCS' => fake()->randomNumber($nbDigits = 2, $strict = true),
             'IDREG' => fake()->randomNumber($nbDigits = 2, $strict = true),
-            'username' => fake()->unique()->userName(),
-            'username_verified_at' => now(),
+            'email' => fake()->unique()->safeEmail(),
+            'email_verified_at' => now(),
             'password' => 'h36h73hf486$#', 
             'firstname' => fake()->firstName(),    
             'lastname' => fake()->lastName(),
             'phone' => fake()->phoneNumber(),
-            'hasRole' => fake()->numberBetween($min = 1, $max = 3),
+            'hasAdmin' => $hasAdmin,
+            'hasRole' => $hasRole,
             'remember_token' => Str::random(10),
         ];
     }
@@ -38,7 +51,7 @@ class UserFactory extends Factory
     public function unverified()
     {
         return $this->state(fn (array $attributes) => [
-            'username_verified_at' => null,
+            'email_verified_at' => null,
         ]);
     }
 }
