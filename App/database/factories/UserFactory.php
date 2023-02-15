@@ -21,7 +21,7 @@ class UserFactory extends Factory
         $hasAdmin = false;
         $hasRole = fake()->numberBetween($min = 1, $max = 3);
 
-        // $role_ids = DB::table('users')->get('hasRole');
+        // $role_ids = DB::table('users')->get('hasRole'); // => [{hasRole:1}, {hasRole:2}]
         // foreach($role_ids as $role_id){
         //     if($role_id->hasRole == 1){
         //         $hasAdmin = true;
