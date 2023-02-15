@@ -15,3 +15,5 @@ Model/Controller :
 Factory :
 -- php artisan make:factory StateFactory
 -- php artisan make:factory TreatmentFactory
+Request :
+-- php artisan make:request UserRequest
