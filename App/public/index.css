@@ -10,7 +10,7 @@
     width: 15px;
 }
 ::-webkit-scrollbar-track {
-    background: #fff;  
+    background: #fff;
     box-shadow: inset 0 0 5px grey;
 }
 ::-webkit-scrollbar-thumb {
@@ -19,5 +19,11 @@
     border-radius: 2px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--green-degree); 
+    background: var(--green-degree);
 }
+/* .page-item{
+
+}
+.page-item.active .page-link{
+
+} */
