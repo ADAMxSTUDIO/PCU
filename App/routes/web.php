@@ -27,5 +27,5 @@ Route::get('/Create_Case', function () {
 // CRUD to manage users(admin, agents or patients)
 Route::resource('user', UserController::class);
 
-// 
+// Access to the login page
 Route::view('login', 'auth.login');
