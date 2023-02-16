@@ -125,7 +125,7 @@ section>h1{
 }
 .profile-pic>img{
     position: absolute;
-    transform: scale(1.9, 1.84) translate(24%, 22.5%);
+    transform: scale(1.9, 1.84) translate(24%, 22.55%);
     width: 100%;
     height: 100%;
     border-radius: inherit;
