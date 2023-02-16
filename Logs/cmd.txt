@@ -17,3 +17,4 @@ Factory :
 -- php artisan make:factory TreatmentFactory
 Request :
 -- php artisan make:request UserRequest
+-- php artisan make:request TreatmentRequest
