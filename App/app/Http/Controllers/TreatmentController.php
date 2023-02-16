@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\Treatment;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\TreatmentRequest;
 
 class TreatmentController extends Controller
 {
@@ -24,18 +27,25 @@ class TreatmentController extends Controller
      */
     public function create()
     {
-        //
+        // fetch all patient-users 
+        $patients = User::where('hasRole', 2)->get();
+        return view('treatments.create', ['patients' => $patients, 'roles' => Role::all()]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  TreatmentRequest  $request
+     * @return Response
      */
-    public function store(Request $request)
+    public function store(TreatmentRequest $request)
     {
-        //
+        Treatment::create([
+            'patient_id' => $request->input('patient'),
+            'treated_by' => $request->input('agent'),
+            'details' => $request->input('details'),
+        ]);
+        return view('users.index')->with('treatStoreSuccess', 'Le traitement a été enregistré avec succès');
     }
 
     /**
@@ -57,7 +67,7 @@ class TreatmentController extends Controller
      */
     public function edit(Treatment $treatment)
     {
-        //
+        return view('treatments.edit', compact('treatment'));
     }
 
     /**
