@@ -16,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(8);
+        $users = User::paginate(5);
         return view('users.index', ['users' => $users]);
     }
 
@@ -27,7 +27,11 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::all();
+        // filter roles by letting one unique admin user
+        foreach ( Role::all() as $role ){
+            
+        }
+        // $roles = Role::all();
         return view('users.create', ['roles' => $roles]);
     }
 
