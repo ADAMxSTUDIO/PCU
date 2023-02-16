@@ -36,7 +36,7 @@ class UserRequest extends FormRequest
             'last' => 'required|string|max:45',
             'first' => 'required|string|max:45',
             'tel' => 'required|regex:/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/',
-            'profile' => 'mimes:jpg,png,jpeg|size<1000000',
+            'profile' => 'mimes:jpg,png,jpeg|max:4000',
             'role' => 'required',
         ];
     }
