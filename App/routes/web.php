@@ -1,7 +1,9 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TreatmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,8 +26,11 @@ Route::get('/Create_Case', function () {
     return view('create');
 });
 
-// CRUD to manage users(admin, agents or patients)
-Route::resource('user', UserController::class);
-
 // Access to the login page
 Route::view('login', 'auth.login');
+
+// CRUD : users(admin, agents or patients)
+Route::resource('user', UserController::class);
+
+// CRUD : treatments
+Route::resource('treatment', TreatmentController::class);
