@@ -10,7 +10,7 @@
         <h1 class="mb-3 text-primary" style="font-size: 1.6em">Ajouter un nouveau traitement</h1>
         <form action="{{ route('treatment.store') }}" method="POST" class="mt-3">
             @csrf
-            @method('POST')
+            @method('PUT')
             {{-- Patient field --}}
             <div class="form-group mb-3">
                 <label for="patient">Patient</label>
