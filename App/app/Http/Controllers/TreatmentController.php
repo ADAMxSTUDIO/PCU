@@ -45,7 +45,7 @@ class TreatmentController extends Controller
             'treated_by' => $request->input('agent'),
             'details' => $request->input('details'),
         ]);
-        return view('users.index')->with('treatStoreSuccess', 'Le traitement a été enregistré avec succès');
+        return view('treatments.index')->with('treatStoreSuccess', 'Le traitement a été enregistré avec succès');
     }
 
     /**
@@ -79,7 +79,22 @@ class TreatmentController extends Controller
      */
     public function update(Request $request, Treatment $treatment)
     {
-        //
+        // validate status radio input
+        // $this->validate($request, [
+        //     'patient' => 'regex:/^[0-9]+$/',
+        //     'status' => 'required|boolean',
+        // ],[
+        //     'patient' => 'Erreur, un problème est survenu! Re-lance cette page à nouveau.', 
+        //     'status'=> 'Erreur, un problème est survenu! Re-lance cette page à nouveau.', 
+        // ]);
+
+        // Update query
+        Treatment::where('id', $treatment)->update([
+            'treated_by' => $request->input('agent'),
+            'details' => $request->input('details'),
+            'isClosed' => $request->input('status'),
+        ]);
+        // return view('treatments.index')->with('treatUpdateSuccess', 'Le traitement a été modifié avec succès');
     }
 
     /**
