@@ -15,9 +15,9 @@
             <h1 class="mb-3 text-primary" style="font-size: 1.6em">Modifier le traitement</h1>
             <span>Traitement - {{ $treatment->id }}</span>
         </div>
-        <form action="{{ route('treatment.update', ['treatment' => $treatment->id]) }}" method="PUT" class="mt-3">
+        <form action="{{ route('treatment.update', ['treatment' => $treatment->id]) }}" method="POST" class="mt-3">
             @csrf
-            @method('PUT')
+            @method('PATCH')
             <div class="row">
                 {{-- Patient field --}}
                 <div class="form-group col">
@@ -34,10 +34,19 @@
                 {{-- Status field --}}
                 <div class="form-group col">
                     <label>Statut du traitement</label>
-                    <div class="form-group d-flex justify-content-between">
-                        <input class="form-control btn btn-success" type="checkbox" name="status"  checked value="open" />
-                        <input class="form-control btn btn-danger" type="checkbox" name="status"  value="closed" />
-                    </div>
+                    <div class="form-group d-flex justify-content-between" style="position: relative;">
+                        <label for="open"  style="position: absolute; left: 20%; top: 25%;z-index: 2;">OUVERT</label>
+                        <input  type="radio" id="open" name="status"  checked value="true" />
+                            <div class="gap" style="width: 10px;"></div>
+                        <label for="closed"  style="position: absolute; left: 70%; top: 25%;z-index: 2;">CLOTURE</label>
+                        <input type="radio" id="closed" name="status"  value="false" />
+                    </div> <!-- form-control btn btn class="text-light" -->
+                    {{-- Status error --}}
+                    @error('status')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
             </div>
 
