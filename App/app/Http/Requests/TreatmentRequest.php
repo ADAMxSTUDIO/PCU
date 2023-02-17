@@ -26,7 +26,7 @@ class TreatmentRequest extends FormRequest
     {
         return [
             'patient' => 'required|regex:/^[0-9]+$/|unique:users|max:' . User::all()->count(),
-            'agent' => 'required|regex:/^[a-z ]+\\s+$/i|max:25',
+            'agent' => 'required|string|max:25',
             'details' => 'required|string|max:255',
         ];
     }
