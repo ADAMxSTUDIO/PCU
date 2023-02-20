@@ -15,7 +15,7 @@
             <h1 class="mb-3 text-primary" style="font-size: 1.6em">Modifier le traitement</h1>
             <span>Traitement - {{ $treatment->id }}</span>
         </div>
-        <form action="{{ route('treatment.update', ['treatment' => $treatment->id]) }}" method="POST" class="mt-3">
+        <form action="{{ route('treatment.update', $treatment->id) }}" method="POST" class="mt-3">
             @csrf
             @method('PATCH')
             <div class="row">
