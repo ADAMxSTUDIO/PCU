@@ -21,7 +21,7 @@ class TreatmentFactory extends Factory
             'patient_id'=> fake()->numberBetween(1, 3),
             'treated_by' => fake()->name(),
             'details' => Str::random(20),
-            'isClosed' => fake()->boolean
+            'isClosed' => false,
         ];
     }
 }
