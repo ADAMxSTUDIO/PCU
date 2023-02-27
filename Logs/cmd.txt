@@ -1,0 +1,17 @@
+Migration :
+-- php artisan make:migration create_roles_table
+-- php artisan make:migration create_users_table
+-- php artisan make:migration create_cases_table
+-- php artisan make:migration create_treatments_table
+Seeder :
+-- php artisan make:seeder RoleSeeder
+-- php artisan make:seeder UserSeeder
+-- php artisan make:seeder StateSeeder
+-- php artisan make:seeder TreatmentSeeder
+Model/Controller :
+-- php artisan make:model Role -r
+-- php artisan make:model State -r -- as Case(possessed by PHP)
+-- php artisan make:model Treatment -r
+Factory :
+-- php artisan make:factory StateFactory
+-- php artisan make:factory TreatmentFactory
